@@ -38,7 +38,7 @@ traffic_main_menu = '''Traffic Calculations\n
 4: Network Bandwidth - calculate bandwidth for given codec and call count\n\n
 Press Q to return to main menu'''
 
-codec_prompt = '''\n\nCodec Selection\n
+codec_prompt = '''Codec Selection\n
 1: G.711 (20ms)
 2: G.723.1 (5.3 Kbps) (30ms)
 3: G.723.1 (6.3 Kbps) (30ms)
@@ -49,7 +49,7 @@ codec_prompt = '''\n\nCodec Selection\n
 8: G722 (20ms)\n
 Which Codec would you like to use: '''
 
-network_layer_prompt = '''\n\nNetwork Layers\n
+network_layer_prompt = '''Network Layers\n
 1: Network (L1) - most
 2: Channel (L2)
 3: IP
@@ -58,7 +58,7 @@ network_layer_prompt = '''\n\nNetwork Layers\n
 6: Data - least\n
 What layer of Network do you want to calculate from: '''
 
-vlan_tag_prompt = '''\n\n802.1Q
+vlan_tag_prompt = '''802.1Q
 1: Yes
 2: No
 
