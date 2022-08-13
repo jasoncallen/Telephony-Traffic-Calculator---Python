@@ -64,7 +64,7 @@ vlan_tag_prompt = '''802.1Q
 
 Do you want to include in calculation: '''
 
-silence_prompt = 'Because Silence Suppression (or Voice Activity Detection) can vary widely in bandwidth reduction, it was not taken into consideration. For purposes of planning and design, Silence Suppression should never be used for circuits less than 24 concurrent calls. Also keep in mind things like music on hold render it useless as well.'
+silence_prompt = "Because Silence Suppression (or Voice Activity Detection) can vary widely in bandwidth reduction, it was not taken into consideration. For purposes of planning and design, Silence Suppression should never be used for circuits less than 24 concurrent calls. Also keep in mind things like music on hold render it useless as well."
 
 ###############################################################################################
 # ---------------------------Defined Functions-------------------------------------------------
