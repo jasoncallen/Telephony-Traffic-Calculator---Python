@@ -17,11 +17,11 @@ this program. If not, see <http://www.gnu.org/licenses/>.
 __author__ = "Jason Callen"
 __credits__ = ["Jason Callen"]
 __license__ = "GPLv3"
-__version__ = "1.0.1"
+__version__ = "1.0.2"
 __maintainer__ = "Jason Callen"
 __email__ = "jason@jasoncallenenterprises.com"
 __status__ = "Production"
-__date__ = "2022/08/10"
+__date__ = "2023/03/04"
 __deprecated__ = False
 
 import os
@@ -128,13 +128,6 @@ def menu_check_no_max_float(prompt):
         except KeyboardInterrupt:
             print('\nPlease do not stop the program.')
 
-
-def pause_clear():
-    # Function will pause and clear the screen
-    os.system('pause')
-    os.system('cls')
-
-
 def traffic_menu():
     # Function to start traffic menu
     while (True):
@@ -145,19 +138,17 @@ def traffic_menu():
         if option == 1:
             os.system('cls')
             traffic_menu_item_1()
-            pause_clear()
         elif option == 2:
             os.system('cls')
             traffic_menu_item_2()
-            pause_clear()
         elif option == 3:
             os.system('cls')
             traffic_menu_item_3()
-            pause_clear()
         elif option == 4:
             os.system('cls')
             traffic_menu_item_4()
-            pause_clear()
+        os.system('pause')
+        os.system('cls')
 
 
 def traffic_menu_item_1():
