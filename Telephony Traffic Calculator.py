@@ -17,9 +17,9 @@ this program. If not, see <http://www.gnu.org/licenses/>.
 __author__ = "Jason Callen"
 __credits__ = ["Jason Callen"]
 __license__ = "GPLv3"
-__version__ = "1.0.2"
+__version__ = "1.0.0"
 __maintainer__ = "Jason Callen"
-__email__ = "jason@jasoncallenenterprises.com"
+__email__ = "media@jasoncallen.com"
 __status__ = "Production"
 __date__ = "2023/10/08"
 __deprecated__ = False
