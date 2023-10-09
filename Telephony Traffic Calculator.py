@@ -21,7 +21,7 @@ __version__ = "1.0.2"
 __maintainer__ = "Jason Callen"
 __email__ = "jason@jasoncallenenterprises.com"
 __status__ = "Production"
-__date__ = "2023/03/04"
+__date__ = "2023/10/08"
 __deprecated__ = False
 
 import os
@@ -88,9 +88,6 @@ def menu_check_min_max(prompt, min_value, max_value):
                 print('Entry cannot be empty.')
             else:
                 print('Invalid option. Please enter a number between', min_value, ' and', max_value)
-        except KeyboardInterrupt:
-            print('\nPlease do not stop the program.')
-
 
 def menu_check_no_max_int(prompt):
     # Function to check input int without a max value
@@ -106,9 +103,6 @@ def menu_check_no_max_int(prompt):
                 print('Entry cannot be empty.')
             else:
                 print('Invalid option. Please enter a whole number.')
-        except KeyboardInterrupt:
-            print('\nPlease do not stop the program.')
-
 
 def menu_check_no_max_float(prompt):
     # Function to check input float without a max value
@@ -125,27 +119,22 @@ def menu_check_no_max_float(prompt):
                 print('Entry cannot be empty.')
             else:
                 print('Invalid option. Please enter a number.')
-        except KeyboardInterrupt:
-            print('\nPlease do not stop the program.')
 
 def traffic_menu():
     # Function to start traffic menu
     while (True):
         print(traffic_main_menu)
         option = menu_check_min_max('\nEnter a number: ', 1, 4)
+        os.system('cls')
         if option == 'Q':
             return
         if option == 1:
-            os.system('cls')
             traffic_menu_item_1()
         elif option == 2:
-            os.system('cls')
             traffic_menu_item_2()
         elif option == 3:
-            os.system('cls')
             traffic_menu_item_3()
         elif option == 4:
-            os.system('cls')
             traffic_menu_item_4()
         os.system('pause')
         os.system('cls')
@@ -154,7 +143,7 @@ def traffic_menu():
 def traffic_menu_item_1():
     # Function to calculate the erlang value for call rate, handle and hold time.
     arrival_rate = menu_check_no_max_int('Enter the number of calls per minute: ')
-    mean_hold_time = menu_check_no_max_int('Enter the Mean Hold time in seconds: ')
+    mean_hold_time = menu_check_no_max_int('Enter the Mean Hold Time in seconds: ')
     average_call_time = menu_check_no_max_int('Enter the Average Call Time in seconds: ')
     total_time = (mean_hold_time + average_call_time) / 60
     erlangs = "{:.03f}".format(round((arrival_rate * total_time) / 60, 4))
@@ -169,7 +158,7 @@ def traffic_menu_item_2():
     previous_e = 1
 
     erlangs = menu_check_no_max_float('Enter amount of Erlang per hour: ')
-    block_level_goal = menu_check_no_max_float('Enter the block level. i.e .03 is 3 calls out of 100: ')
+    block_level_goal = menu_check_no_max_float('Enter the block level. Example .03 is 3 calls out of 100: ')
     while (True):
         block_percentage = ((erlangs / channel) * previous_d) / (previous_e + ((erlangs / channel) * previous_d))
         previous_e = previous_e + ((erlangs / channel) * previous_d)
@@ -181,11 +170,21 @@ def traffic_menu_item_2():
 
 
 def traffic_menu_item_3():
-    # Function to get values from user and calculate block.
-    erlangs = menu_check_no_max_float('Enter amount of Erlang per hour: ')
+    # Function to get values from the user and calculate blocking.
+    erlangs = menu_check_no_max_float('Enter the Erlangs per hour: ')
     channels = menu_check_no_max_int('Number of channels: ')
-    grade_of_service = traffic_probability_block(erlangs, channels)
-    print('\n\nThere would be a', grade_of_service, ' chance to block calls.\n\n')
+    
+    # Calculate the grade of service
+    b = 1
+    k = 1
+    count = 0
+    while  k <= channels:
+        count += 1
+        b = 1 + (count * b) / erlangs
+        k += 1
+    block_probability = 1/b
+    block_percentage = "{:.02%}".format(block_probability)
+    print('\n\nThere would be a ', block_percentage, ' change to block calls.\n\n')
 
 
 def traffic_menu_item_4():
@@ -209,28 +208,11 @@ def traffic_menu_item_4():
     else:
         vlan_tag_size = 0
     os.system('cls')
-    voip_data_size = codec_sample_size * 1
     total_packets_per_second = packets_per_second * number_of_calls
-    kbps_answer = "{:,}".format(round((voip_data_size + protocol_stack_size + vlan_tag_size) * total_packets_per_second * 8 / 1000, 2))
+    kbps_answer = "{:,}".format(round((codec_sample_size + protocol_stack_size + vlan_tag_size) * total_packets_per_second * 8 / 1000, 2))
     wrapped_lines = textwrap.wrap(silence_prompt)
     print("\n".join(wrapped_lines))
     print('\n\nIt will require approximately', kbps_answer, 'Kbps.\n\n')
-
-
-def traffic_probability_block(offer, channels):
-    # Function to calculate block probability
-    b = 1
-    k = 1
-    count = 0
-    while k <= channels:
-
-        count += 1
-        b = 1+(count*b)/offer
-        k += 1
-    block_probability = 1/b
-    percentage = "{:.02%}".format(block_probability)
-    return percentage
-
 
 if __name__ == "__main__":
     traffic_menu()
